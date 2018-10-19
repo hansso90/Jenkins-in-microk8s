@@ -1,0 +1,54 @@
+# A Kubernetes ConfigMap providing the configuration-as-code
+# default config for Kubernetes plugin and an example job
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-configuration-as-code
+data:
+  configuration-as-code.yaml: |
+    jenkins:
+      agentProtocols:
+      - "JNLP4-connect"
+      - "Ping"
+      clouds:
+      - kubernetes:
+          containerCapStr: "10"
+          jenkinsUrl: "http://10.1.1.211:8080"
+          maxRequestsPerHostStr: "32"
+          name: "kubernetes"
+          serverUrl: "http://10.0.2.15:8080"
+          templates:
+          - containers:
+            - args: "cat"
+              command: "/bin/sh -c"
+              image: "localhost:32000/jenkins-slave:1.0"
+              livenessProbe:
+                failureThreshold: 0
+                initialDelaySeconds: 0
+                periodSeconds: 0
+                successThreshold: 0
+                timeoutSeconds: 0
+              name: "jenkins-slave"
+              ttyEnabled: true
+            label: "jenkins-slave"
+            name: "jenkins-slave"
+            nodeUsageMode: NORMAL
+            workspaceVolume:
+              emptyDirWorkspaceVolume:
+                memory: false
+      crumbIssuer:
+        standard:
+          excludeClientIPFromCrumb: false
+      disableRememberMe: false
+      mode: NORMAL
+      numExecutors: 0
+      primaryView:
+        all:
+          name: "all"
+      quietPeriod: 5
+      scmCheckoutRetryCount: 0
+      slaveAgentPort: 50000
+      views:
+      - all:
+          name: "all"
