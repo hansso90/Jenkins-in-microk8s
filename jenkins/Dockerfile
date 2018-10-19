@@ -1,5 +1,5 @@
 FROM jenkins/jenkins:2.147-slim
-LABEL maintainer="pdok@pdok.nl"
+LABEL maintainer="hansso90"
 
 #Memory settings
 ENV JAVA_OPTS="-Xmx8192m -"
