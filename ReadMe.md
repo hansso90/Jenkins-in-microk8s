@@ -41,14 +41,16 @@ microk8s.kubectl port-forward svc/jenkins 9000
 With http://localhost:9000 you could connect to jenkins
 
 
+## search for ip adresses for configuration
+
 Setup k8s on jenkins in `configure system`
 ```
 # get service ip van kubernetes
-kubectl cluster-info | grep master #e.g. local-ip:8080
+microk8s.kubectl cluster-info | grep master #e.g. local-ip:8080
 
 # search for the ip from pod `jenkins`
-kubectl get pods | grep jenkins #e.g. jenkins-5fdbf5d7c5-dj2rq
-kubectl describe pod jenkins-5fdbf5d7c5-dj2rq #e.g. 10.1.1.117:8080
+microk8s.kubectl get pods | grep jenkins #e.g. jenkins-5fdbf5d7c5-dj2rq
+microk8s. kubectl describe pod jenkins-5fdbf5d7c5-dj2rq #e.g. 10.1.1.117:8080
 ```
 
 add new cloud:
