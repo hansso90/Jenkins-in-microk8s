@@ -14,7 +14,7 @@ data:
       clouds:
       - kubernetes:
           containerCapStr: "10"
-          jenkinsUrl: "http://10.1.1.211:8080"
+          jenkinsUrl: "http://10.1.1.114:8080"
           maxRequestsPerHostStr: "32"
           name: "kubernetes"
           serverUrl: "http://10.0.2.15:8080"
@@ -34,6 +34,13 @@ data:
             label: "jenkins-slave"
             name: "jenkins-slave"
             nodeUsageMode: NORMAL
+            volumes:
+            - hostPathVolume:
+                hostPath: "/usr/bin/docker"
+                mountPath: "/usr/bin/docker"
+            - hostPathVolume:
+                hostPath: "/var/run/docker.sock"
+                mountPath: "/var/run/docker.sock"
             workspaceVolume:
               emptyDirWorkspaceVolume:
                 memory: false

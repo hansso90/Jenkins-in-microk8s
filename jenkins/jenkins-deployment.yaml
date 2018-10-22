@@ -32,6 +32,12 @@ spec:
           mountPath: /var/jenkins_home
         - name: jenkins-configuration-as-code
           mountPath: /var/jenkins_home/casc_configs
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+          readOnly: false
+#        - name: docker
+#          mountPath: /usr/bin/docker
+#          readOnly: false
 
 
       volumes:
@@ -41,6 +47,13 @@ spec:
       - name: jenkins-configuration-as-code
         configMap:
           name: jenkins-configuration-as-code
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+#      - name: docker
+#        hostPath:
+#          path: /usr/bin/docker
+
 ---
 apiVersion: v1
 kind: Service
